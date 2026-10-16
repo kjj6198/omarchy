@@ -61,7 +61,9 @@ BarWidget {
         font.pixelSize: Style.font.body
         anchors.verticalCenter: parent.verticalCenter
 
-        property bool needsScroll: implicitWidth > scrollClip.width
+        // Against the cap, not scrollClip.width, which follows implicitWidth
+        // a pass later and would read a title that grew but fits as overflowing.
+        property bool needsScroll: implicitWidth > root.maxLabelWidth
 
         // NumberAnimation latches `from`/`to` at the instant it starts, and
         // `scrollClip.width` (the source of `from`) is still 0 on the frame
